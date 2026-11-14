@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://d2m2hqwsgmfq4"]
+
+[ext_resource type="PackedScene" uid="uid://xjmohbyt43kv" path="res://main.tscn" id="1_0hol4"]
+[ext_resource type="Script" uid="uid://cern3h0qqqd4m" path="res://ballbounce.gd" id="2_q6r6c"]
+[ext_resource type="PackedScene" uid="uid://vc417ea6ogbo" path="res://ball.tscn" id="3_kdubu"]
+[ext_resource type="Script" uid="uid://1rdsgk7hlgf3" path="res://evilball.gd" id="4_d21ai"]
+
+[node name="Node2D" unique_id=1631079862 instance=ExtResource("1_0hol4")]
+
+[node name="enemy" parent="." index="7" unique_id=681387503]
+visible = false
+
+[node name="BALL" parent="." index="8" unique_id=1244104728]
+script = ExtResource("2_q6r6c")
+
+[node name="BALL2" parent="." index="9" unique_id=565101370 instance=ExtResource("3_kdubu")]
+
+[node name="evil BALL" parent="." index="12" unique_id=1085029469]
+script = ExtResource("4_d21ai")
+
+[node name="evil BALL2" parent="." index="13" unique_id=1872883777 instance=ExtResource("3_kdubu")]
+position = Vector2(274, 438)
+script = ExtResource("4_d21ai")

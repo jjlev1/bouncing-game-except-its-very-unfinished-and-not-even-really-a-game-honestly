@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bb1hxdapjdq08"]
+
+[ext_resource type="Script" uid="uid://c1aohdib3lljk" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://dpf56t3itstnk" path="res://enemysprite.png" id="2_qi2p4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ylm07"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_keoi4"]
+size = Vector2(17, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6n5y"]
+radius = 332.25443
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_keoi4"]
+radius = 448.78613
+
+[node name="enemy" type="CharacterBody2D" unique_id=681387503]
+script = ExtResource("1_4gyqm")
+
+[node name="enm texture" type="Sprite2D" parent="." unique_id=1550215930]
+texture = ExtResource("2_qi2p4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=491582958]
+shape = SubResource("CircleShape2D_ylm07")
+disabled = true
+
+[node name="enemyhitbox" type="Area2D" parent="." unique_id=1958671940]
+
+[node name="smallest collider (death box)" type="CollisionShape2D" parent="enemyhitbox" unique_id=1971287446]
+shape = SubResource("RectangleShape2D_keoi4")
+
+[node name="enter_area" type="Area2D" parent="." unique_id=518897697]
+
+[node name="small collider" type="CollisionShape2D" parent="enter_area" unique_id=1665880154]
+shape = SubResource("CircleShape2D_x6n5y")
+
+[node name="exit_area" type="Area2D" parent="." unique_id=824053025]
+
+[node name="big collider" type="CollisionShape2D" parent="exit_area" unique_id=901545108]
+shape = SubResource("CircleShape2D_keoi4")
+
+[connection signal="body_entered" from="enemyhitbox" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="enter_area" to="." method="_on_enter_area_body_entered"]
+[connection signal="body_entered" from="exit_area" to="." method="_on_exit_area_body_entered"]
+[connection signal="body_exited" from="exit_area" to="." method="_on_exit_area_body_exited"]

@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://xjmohbyt43kv"]
+
+[ext_resource type="Script" uid="uid://cgjr7237akhw8" path="res://playerguy.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://ck0iwjrrmekpd" path="res://main.gd" id="1_kek77"]
+[ext_resource type="Texture2D" uid="uid://dsqmyhyqf5thm" path="res://applesprite.png" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bjlw6uar5135v" path="res://apple.tscn" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dgtfmgn5tahs0" path="res://bucket.png" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bb1hxdapjdq08" path="res://enemy.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://vc417ea6ogbo" path="res://ball.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://cagun5hucjlgl" path="res://static_body_2d.tscn" id="7_272bh"]
+[ext_resource type="Script" uid="uid://cw3h2wlkda3bl" path="res://spawnpoint.gd" id="9_4c57u"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0xm2m"]
+load_path = "res://.godot/imported/playersprite.png-e06340e0a9f984aba026c6017c6b36c1.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6n5y"]
+size = Vector2(95, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek726"]
+size = Vector2(91, 52)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ec5k0"]
+radius = 45.044422
+
+[node name="Node2D" type="Node2D" unique_id=1631079862]
+script = ExtResource("1_kek77")
+
+[node name="Playerguy" type="CharacterBody2D" parent="." unique_id=1536464569 groups=["player"]]
+position = Vector2(351, 329)
+script = ExtResource("1_ig7tw")
+
+[node name="box guy" type="Sprite2D" parent="Playerguy" unique_id=1845442266]
+position = Vector2(0, 2)
+scale = Vector2(1.2409999, 0.69200003)
+texture = SubResource("CompressedTexture2D_0xm2m")
+
+[node name="pickuparea" type="Area2D" parent="Playerguy" unique_id=811792340]
+position = Vector2(0, 1)
+
+[node name="player collision" type="CollisionShape2D" parent="Playerguy/pickuparea" unique_id=484389866]
+shape = SubResource("RectangleShape2D_x6n5y")
+
+[node name="carriedapple" type="Sprite2D" parent="Playerguy" unique_id=1403015146]
+visible = false
+position = Vector2(-1, -26)
+scale = Vector2(0.5, 0.18)
+texture = ExtResource("2_0xm2m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Playerguy" unique_id=1733371834]
+position = Vector2(-16, 11)
+shape = SubResource("RectangleShape2D_ek726")
+
+[node name="item" parent="." unique_id=54804471 instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(142, 516)
+
+[node name="item2" parent="." unique_id=12934272 instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(920, 98)
+
+[node name="item3" parent="." unique_id=1588208989 instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(991, 440)
+
+[node name="item4" parent="." unique_id=515186081 instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(558, 119)
+
+[node name="item5" parent="." unique_id=87803342 instance=ExtResource("3_h2yge")]
+visible = false
+position = Vector2(632, 131)
+
+[node name="bucket" type="Area2D" parent="." unique_id=685336504 groups=["bucket"]]
+visible = false
+
+[node name="bucket" type="Sprite2D" parent="bucket" unique_id=1801967970]
+position = Vector2(634, 550)
+texture = ExtResource("4_1bvp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bucket" unique_id=1755043155]
+position = Vector2(638, 555)
+shape = SubResource("CircleShape2D_ec5k0")
+
+[node name="enemy" parent="." unique_id=681387503 instance=ExtResource("5_lquwl")]
+position = Vector2(722, 123)
+
+[node name="BALL" parent="." unique_id=1244104728 instance=ExtResource("6_7mycd")]
+
+[node name="StaticBody2D" parent="." unique_id=155098206 instance=ExtResource("7_272bh")]
+
+[node name="spawnpoint" type="CharacterBody2D" parent="." unique_id=1720396175]
+script = ExtResource("9_4c57u")
+
+[node name="Timer" type="Timer" parent="spawnpoint" unique_id=643334568]
+autostart = true
+
+[node name="evil BALL" parent="." unique_id=1085029469 instance=ExtResource("6_7mycd")]
+position = Vector2(274, 438)
+
+[connection signal="area_entered" from="Playerguy/pickuparea" to="Playerguy" method="_on_pickuparea_area_entered"]
+[connection signal="timeout" from="spawnpoint/Timer" to="spawnpoint" method="_on_timer_timeout"]

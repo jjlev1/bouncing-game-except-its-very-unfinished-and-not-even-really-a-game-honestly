@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bjlw6uar5135v"]
+
+[ext_resource type="Texture2D" uid="uid://dsqmyhyqf5thm" path="res://applesprite.png" id="1_3ed3y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylm07"]
+size = Vector2(72, 75)
+
+[node name="item" type="Area2D" unique_id=54804471 groups=["apple"]]
+
+[node name="apple guy" type="Sprite2D" parent="." unique_id=1300672471]
+position = Vector2(-2, 5)
+texture = ExtResource("1_3ed3y")
+
+[node name="collision apple" type="CollisionShape2D" parent="." unique_id=1094022704]
+position = Vector2(3, 1.5)
+shape = SubResource("RectangleShape2D_ylm07")
+debug_color = Color(0, 0.6, 0.7019608, 0.41960785)
